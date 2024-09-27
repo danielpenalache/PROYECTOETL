@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Visualización de Datos</title>  
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;  
+            background:#ffffff;  
+            margin: 0;  
+            padding: 0;  
+            padding-bottom: 100px;  
+        }
+        .header {
+            text-align: center; 
+            padding: 20px;  
+            background: #ffffff;  
+        }
+        .header img {
+            max-width: 50%;  
+            height: 200px;  
+        }
+        .button-container {
+            text-align: center;  
+            margin: 20px; 
+        }
+        .button {
+            margin: 5px;  
+            padding: 10px;  
+            border: none;  
+            border-radius: 10px; 
+            color: white;  
+            background-color: #509c4c;  
+            cursor: pointer;  
+            font-size: 16px;  
+        }
+        .button:hover {
+            background-color: #509c4cd0;  
+        }
+        .graph-container {
+            margin: 20px;  
+            text-align: center;  
+        }
+        .graph {
+            display: none;  
+        }
+        
+        .footer {
+            text-align: center;  
+            padding: 5px;  
+            background: radial-gradient(circle,#304a6e, #ffffff); 
+            position: fixed;  
+            bottom: 0;  
+            width: 100%; 
+            box-shadow: 0 -1px 5px rgba(0,0,0,0.1);  
+        }
+        .footer .team-member {
+            display: inline-block; 
+            margin: 0 10px;  
+            text-align: center;  
+        }
+        .footer img {
+            border-radius: 50%;  
+            width: 60px; 
+            height: 60px; 
+            margin-bottom: 5px;  
+        }
+        .footer .name {
+            font-size: 14px;  
+        }
+    </style>
+    <script>
+        // Función para mostrar el gráfico seleccionado
+        function mostrarGrafico(tipo) {
+            // Obtención de los elementos de los gráficos
+            var graficoTorta = document.getElementById('grafico_torta');
+            var graficoBarras = document.getElementById('grafico_barras');
+            var graficoPrecisión = document.getElementById('grafico_precision');
+            var histogramaResiduos = document.getElementById('histograma_residuos');
+            var distribucionHoras = document.getElementById('distribucion_horas');
+            var todosGraficos = document.getElementById('todos_graficos');
+            var graficosDispersión = document.getElementById('graficos_dispersion');
+            var graficoBarrasFrecuencia = document.getElementById('barras_frecuencia');
+
+            // Ocultar todos los gráficos
+            graficoTorta.style.display = 'none';
+            graficoBarras.style.display = 'none';
+            graficosDispersión.style.display = 'none';
+            graficoPrecisión.style.display = 'none';
+            histogramaResiduos.style.display = 'none';
+            distribucionHoras.style.display = 'none';
+            todosGraficos.style.display = 'none';
+            graficoBarrasFrecuencia.style.display = 'none';
+
+            // Mostrar el gráfico correspondiente al botón presionado
+            if (tipo === 'torta') {
+                graficoTorta.style.display = 'block'; 
+            } else if (tipo === 'barras') {
+                graficoBarras.style.display = 'block'; 
+            } else if (tipo === 'dispersion') {
+                graficosDispersión.style.display = 'block'; 
+            } else if (tipo === 'precision') {
+                graficoPrecisión.style.display = 'block'; 
+            } else if (tipo === 'histograma') {
+                histogramaResiduos.style.display = 'block'; 
+            } else if (tipo === 'distribucion') {
+                distribucionHoras.style.display = 'block'; 
+            } else if (tipo === 'todos') {
+                todosGraficos.style.display = 'block'; 
+            } else if (tipo === 'frecuencia') {
+                graficoBarrasFrecuencia.style.display = 'block';
+            }
+        }
+
+        // Función para mostrar el gráfico de dispersión correspondiente
+        function mostrarGraficoDispersion(tipo) {
+            var dispersionCantidad = document.getElementById('dispersion_cantidad');
+            var dispersionDescuento = document.getElementById('dispersion_descuento');
+
+            // Ocultar ambos gráficos de dispersión
+            dispersionCantidad.style.display = 'none';
+            dispersionDescuento.style.display = 'none';
+
+            // Mostrar el gráfico correspondiente
+            if (tipo === 'cantidad') {
+                dispersionCantidad.style.display = 'block';
+            } else if (tipo === 'descuento') {
+                dispersionDescuento.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <img src="header.png" alt="Imagen de Cabecera">  
+    </div>
+
+    <div class="button-container">
+        
+        <button class="button" onclick="mostrarGrafico('torta')">Edad empleados</button>
+        <button class="button" onclick="mostrarGrafico('barras')">Cantidad total de productos</button>
+        <button class="button" onclick="mostrarGrafico('frecuencia')">Frecuencia pedidos</button>
+        <button class="button" onclick="mostrarGrafico('dispersion')">Dispersion Cantidad-Descuento</button>
+        <button class="button" onclick="mostrarGrafico('precision')">Precision IA</button>
+        <button class="button" onclick="mostrarGrafico('histograma')">Histograma de Residuos</button>
+        <button class="button" onclick="mostrarGrafico('distribucion')">Distribución de Horas</button>
+        <button class="button" onclick="mostrarGrafico('todos')">Todos</button>
+    </div>
+
+    
+    <div id="grafico_torta" class="graph-container graph">
+        <h2>Edad de los Empleados</h2>
+        <iframe src="empleados_ordenados.html" width="100%" height="600px"></iframe>  
+    </div>
+
+    <div id="grafico_barras" class="graph-container graph">
+        <h2>Cantidad Total de Productos</h2>
+        <iframe src="cantidad_productos.html" width="100%" height="600px"></iframe>  
+    </div>
+
+    <div id="barras_frecuencia" class="graph-container graph">
+        <h2>Frecuencia de pedidos</h2>
+        <iframe src="frecuencia_pedidos.html" width="100%" height="600px"></iframe>  
+    </div>
+    
+    <div id="graficos_dispersion" class="graph-container graph">
+        <h2>Dispersión de Datos</h2>
+        
+        <button class="button" onclick="mostrarGraficoDispersion('cantidad')">Cantidad</button>
+        <button class="button" onclick="mostrarGraficoDispersion('descuento')">Descuento</button>
+
+        <div id="dispersion_cantidad" class="graph">
+            <iframe src="dispersión_cantidad.html" width="100%" height="600px"></iframe>  
+        </div>
+        <div id="dispersion_descuento" class="graph" style="display: none;">
+            <iframe src="dispersión_descuento.html" width="100%" height="600px"></iframe>  
+        </div>
+    </div>
+
+    <div id="grafico_precision" class="graph-container graph">
+        <h2>Comparación de Predicciones y Valores Verdaderos</h2>
+        <iframe src="comparacion_predicciones.html" width="100%" height="600px"></iframe>  
+    </div>
+
+    <div id="histograma_residuos" class="graph-container graph">
+        <h2>Histograma de Residuos</h2>
+        <iframe src="histograma_residuos.html" width="100%" height="600px"></iframe>  
+    </div>
+
+    <div id="distribucion_horas" class="graph-container graph">
+        <h2>Distribución de Horas de Llegada Predicha</h2>
+        <iframe src="distribucion_horas.html" width="100%" height="600px"></iframe>  
+    </div>
+
+    <div id="todos_graficos" class="graph-container graph">
+        <h2>Visualización Completa</h2>
+        
+        <iframe src="empleados_ordenados.html" width="100%" height="600px"></iframe>
+        <iframe src="cantidad_productos.html" width="100%" height="600px"></iframe>
+        <iframe src="dispersión_cantidad.html" width="100%" height="600px"></iframe>
+        <iframe src="dispersión_descuento.html" width="100%" height="600px"></iframe>
+        <iframe src="comparacion_predicciones.html" width="100%" height="600px"></iframe>
+        <iframe src="histograma_residuos.html" width="100%" height="600px"></iframe>
+        <iframe src="distribucion_horas.html" width="100%" height="600px"></iframe>
+        <iframe src="frecuencia_pedidos.html" width="100%" height="600px"></iframe>
+    </div>
+
+    <div class="footer">
+        <div class="team-member">
+            <img src="daniel_pena.jpeg" alt="Daniel Peña"> 
+            <div class="name">Daniel Peña</div> 
+        </div>
+        <div class="team-member">
+            <img src="nicolas_uribe.jpg" alt="Nicolás Uribe"> 
+            <div class="name">Nicolás Uribe</div>  
+        </div>
+        <div class="team-member">
+            <img src="felipe_camacho.png" alt="Felipe Camacho">  
+            <div class="name">Felipe Camacho</div> 
+        </div>
+    </div>
+</body>
+</html>
